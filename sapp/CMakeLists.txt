@@ -615,6 +615,11 @@ fips_begin_app(noentry-dll-sapp windowed)
     sokol_shader(noentry-dll-sapp.glsl ${slang})
     fips_deps(sokol-dll)
 fips_end_app()
+fips_begin_app(noentry-dll-loader-sapp windowed)
+    fips_vs_warning_level(3)
+    fips_files(noentry-dll-loader-sapp.c)
+    sokol_shader(noentry-dll-loader-sapp.glsl ${slang})
+fips_end_app()
 endif()
 
 endif() # FIPS_UWP
