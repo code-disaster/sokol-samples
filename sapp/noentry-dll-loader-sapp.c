@@ -42,10 +42,13 @@ void cleanup(void);
 #if defined(_WIN32)
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
     (void)hInstance; (void)hPrevInstance; (void)lpCmdLine; (void)nCmdShow;
+    /* Windows has no trouble locating sokol-dll.dll in the same directory. */
+    sdyn_load("sokol-dll");
 #else
 int main() {
+    /* Library paths on Linux are a cheerful topic. Try as a relative path and hope for the best. */
+    sdyn_load("./libsokol-dll.so");
 #endif
-    sdyn_load("sokol-dll");
     app_state_t* state = calloc(1, sizeof(app_state_t));
     sapp_run(&(sapp_desc){
         .user_data = state,
